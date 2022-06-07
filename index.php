@@ -3,13 +3,14 @@
     Attention, dans l'application j'ai remplacé pseudo par speudo...
 */
 
-define("ROOT","/chat/index.php");
+const ROOT = "/chat/index.php";
 
 //On récupère l'url demandée
 $urlDemandeeBrute = $_SERVER["REQUEST_URI"];
 
 //Cette fonction enlève les "/ et \" au URL.
 function traiterUrl($urlBrute){
+    //$urlBrute = str_replace(ROOT,"",$urlBrute);
     return trim($urlBrute, "/\\");
 }
 
