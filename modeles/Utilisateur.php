@@ -13,14 +13,17 @@ class Utilisateur implements Connectable
     public function connecter() : BDD{
         return new BDD();
     }
-    //TODO : sécuriser
-    public function connecterUtilisateur($speudo, $mdp){
-        $requeteTrouverUtilisateur = "SELECT * FROM utilisateur WHERE speudo = '" . $speudo . "' AND mdp = '" . $mdp . "'";
-
-        return $this->bdd->faireRequete($requeteTrouverUtilisateur);
-    }
 
     public function deconnecter(){
         $this->bdd->deconnecterBDD();
+    }
+    //TODO : utiliser
+    //Cette fonction cherche un utilisateur en base de données, et si elle le trouve, elle retourne vrai.
+    public function trouverUtilisateur(string $pseudo, string $mdp) : bool{
+        $requeteTrouverUtilisateur = "SELECT count(*) FROM utilisateur WHERE speudo = '" . $pseudo . "' AND mdp = '" . $mdp . "'";
+
+        $resultat = $this->bdd->faireRequete($requeteTrouverUtilisateur);
+        //On regarde si on a un utilisateur correspondant dans le résultat de la requête.
+        return $resultat == "1";
     }
 }

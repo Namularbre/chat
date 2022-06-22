@@ -1,12 +1,16 @@
 <?php
 
 require_once("../../bdd/bdd.php");
+require_once("../../modeles/utilisateur.php");
 
 $bdd = new BDD();
+$utilisateur = new utilisateur();
 
 if (isset($_GET["submit"])) {
-    $speudo = $_GET["speudo"];
+    $pseudo = $_GET["speudo"];
     $mdp = $_GET["mdp"];
+
+    $utilisateur->trouverUtilisateur($pseudo, $mdp);
 
     $requeteTrouverUtilisateur = "SELECT * FROM utilisateur WHERE speudo = '" . $speudo . "' AND mdp = '" . $mdp . "'";
 

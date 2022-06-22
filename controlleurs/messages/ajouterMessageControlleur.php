@@ -43,11 +43,11 @@ header("Location: " . $_SERVER["HTTP_REFERER"]);
 */
 function trouverDestinataire(){
 
-    $speudoDestinataire = $_POST["speudo"];
+    $pseudoDestinataire = $_POST["pseudo"];
     
     $bdd = new BDD();
     
-    $requeteTrouverUtilisateur = "SELECT idUtilisateur FROM utilisateur WHERE speudo = '" . $speudoDestinataire . "'";
+    $requeteTrouverUtilisateur = "SELECT idUtilisateur FROM utilisateur WHERE speudo = '" . traiterTexte($pseudoDestinataire) . "'";
     
     $resultat = $bdd->faireRequete($requeteTrouverUtilisateur);
     //Si on obtient rien, on ne retourne rien
@@ -59,7 +59,7 @@ function trouverDestinataire(){
     return $resultat[0]["idUtilisateur"];
 }
 /*
-    Cette fonction permet de protèger l'application contre les insertions impossible à cause de caractères tel que '\...
+    Cette fonction permet de protéger l'application contre les insertions impossible à cause de caractères tel que '\...
     On enlève les \ et on double les ' pour qu'il puisse se conserver en BDD sans tout casser.
 */
 function traiterTexte($messageBrute){
