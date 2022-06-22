@@ -3,6 +3,10 @@
 require_once("bdd/bdd.php");
 
 $bdd = new BDD();
+//Si la session n'est pas redémarrer, on la démarre pour rafraîchir la page
+if (!isset($_SESSION["speudo"])) {
+    $nomUtilisateur = $_POST["nomUtilisateur"];
+}
 
 $requeteObtenirMessagesUtilisateur = "SELECT m.messageUti, dateEnvoi, u.speudo AS 'destinataire', u2.speudo AS 'expediteur' 
                                     FROM message m INNER JOIN utilisateur u ON (m.idDestinataire=u.idUtilisateur)

@@ -23,7 +23,12 @@
                 Cette fonction détermine si le pseudo passé en paramètre est celui de l'utilisateur
             */
             function estSpeudoUtilisateurCourant($speudo){
-                return $speudo == $_SESSION["speudo"];
+                if (isset($_SESSION["speudo"])){
+                    return $speudo == $_SESSION["speudo"];
+                }
+                else {
+                    return $speudo == $nomUtilisateur;
+                }
             }
         ?>
     </ul>
@@ -33,12 +38,29 @@
     const URL_AFRAICHIR_MESSAGE = 'index.php?p=affichageMessages';
     const METHODE_HTTP_POST = "POST";
     const ASYNCHRONE = true;
+    const NOM_UTILISATEUR = <?php
+        if(isset($_SESSION["speudo"])){
+            echo $_SESSION["speudo"];
+        }
+        else {
+            echo $nomUtilisateur;
+        }
+    ?>;
+
     /*
-            Cette fonction sert à mettre à jour le chat automatiquement
+        Cette fonction sert à envoyer le nom utilisateur pour le rafraichissement des messages
+    */
+    function preparerNomUtilisateur(){
+        let donneesEnvoyes = [encodeURIComponent("nomUtilisateur") + '=' + encodeURIComponent(NOM_UTILISATEUR)];
+        return donneesEnvoyes.join('&').replace(/20%/g,'+');
+    }
+    /*
+        Cette fonction sert à mettre à jour le chat automatiquement
     */
     function mettreAJourChat() {
-        //On créé une requète HTTP
+        //On créé une requête HTTP
         let requeteHttp = new XMLHttpRequest();
+        let donnees = preparerNomUtilisateur();
 
         requeteHttp.addEventListener('error', () => {
            alert("Il y a eu une erreur durant la requête de rafraichissement des messages");
@@ -53,13 +75,7 @@
 
         requeteHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         //On lance la requête HTTP
-        requeteHttp.send();
-    }
-
-    function prepareDonnees(){
-        let pairesDeDonnees = [];
-
-        return pairesDeDonnees.join('&').replace(/%20/,'+');
+        requeteHttp.send(donnees);
     }
     /*
         Toutes les "DELAY" miliseconde, on met à jour le chat
@@ -67,5 +83,6 @@
     setInterval(() => {
         console.log("Mise à jour des messages...");
         mettreAJourChat();
+        console.log(NOM_UTILISATEUR);
     }, DELAY);
 </script>

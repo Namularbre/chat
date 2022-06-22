@@ -39,11 +39,11 @@ class BDD
 
     public function faireRequete($requete){
         //on prépare la requête SQL
-        $requeteSQL = $this->connexion->prepare($requete);
+        $ressource = $this->connexion->prepare($requete);
         //On exécute la requête SQL
-        $requeteSQL->execute();
+        $ressource->execute();
         //On retourne le résultat dans un tableau associatif.
-        return $requeteSQL->fetchAll(PDO::FETCH_ASSOC);
+        return $ressource->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 
