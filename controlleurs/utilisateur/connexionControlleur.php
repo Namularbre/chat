@@ -10,7 +10,7 @@ if (isset($_GET["submit"])) {
     $pseudo = $_GET["speudo"];
     $mdp = $_GET["mdp"];
 
-    $utilisateur->trouverUtilisateur($pseudo, $mdp);
+    $utilisateur->connecterUtilisateur($pseudo, $mdp);
 
     $requeteTrouverUtilisateur = "SELECT * FROM utilisateur WHERE speudo = '" . $speudo . "' AND mdp = '" . $mdp . "'";
 
