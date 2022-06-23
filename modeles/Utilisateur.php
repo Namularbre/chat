@@ -17,7 +17,6 @@ class Utilisateur implements Connectable
     public function deconnecter(){
         $this->bdd->deconnecterBDD();
     }
-    //TODO : utiliser
     //Cette fonction cherche un utilisateur en base de données, et si elle le trouve, elle retourne vrai.
     public function trouverUtilisateur(string $pseudo, string $mdp) : bool{
         $requeteTrouverUtilisateur = "SELECT count(*) FROM utilisateur WHERE speudo = '" . $pseudo . "' AND mdp = '" . $mdp . "'";
