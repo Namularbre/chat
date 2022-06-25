@@ -68,7 +68,7 @@ class Utilisateur implements Connectable
     {
         $requeteTrouverId = "SELECT idUtilisateur 
                              FROM utilisateur 
-                             WHERE pseudo = '" . $pseudo . "' AND mdp = '" . $mdp . "'";
+                             WHERE speudo = '" . $pseudo . "' AND mdp = '" . $mdp . "'";
 
         if(isset($this->bdd->faireRequete($requeteTrouverId)[0]["idUtilisateur"])){
             return $this->bdd->faireRequete($requeteTrouverId)[0]["idUtilisateur"];
