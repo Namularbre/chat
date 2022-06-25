@@ -1,6 +1,7 @@
 <?php
 
 require_once("../../bdd/bdd.php");
+require_once("Connectable.php");
 
 class Utilisateur implements Connectable
 {
@@ -62,4 +63,19 @@ class Utilisateur implements Connectable
 
         $this->bdd->faireRequete($requeteSupprimerUtilisateur);
     }
+    //Cette méthode retourne l'id de l'utilisateur
+    public function trouverIdUtilisateur(string $pseudo, string $mdp) : int
+    {
+        $requeteTrouverId = "SELECT idUtilisateur 
+                             FROM utilisateur 
+                             WHERE pseudo = '" . $pseudo . "', mdp = '" . $mdp . "'";
+
+        if(isset($this->bdd->faireRequete($requeteTrouverId)[0]["idUtilisateur"])){
+            return $this->bdd->faireRequete($requeteTrouverId)[0]["idUtilisateur"];
+        }
+        else {
+            return -1;
+        }
+    }
+
 }

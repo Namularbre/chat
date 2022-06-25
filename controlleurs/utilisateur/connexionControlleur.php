@@ -1,31 +1,24 @@
 <?php
 
-require_once("../../bdd/bdd.php");
 require_once("../../modeles/utilisateur.php");
 
-$bdd = new BDD();
+
 $utilisateur = new utilisateur();
 
 if (isset($_GET["submit"])) {
     $pseudo = $_GET["speudo"];
     $mdp = $_GET["mdp"];
-
-    $utilisateur->connecterUtilisateur($pseudo, $mdp);
-
-    $requeteTrouverUtilisateur = "SELECT * FROM utilisateur WHERE speudo = '" . $speudo . "' AND mdp = '" . $mdp . "'";
-
-    $resultat = $bdd->faireRequete($requeteTrouverUtilisateur);
-    //Si l'utilisateur n'éxiste pas, on annule
-    if ($resultat == []) {
-        echo "Nom d'utilisateur ou/et mot de passe incorrect(s)";
+    //Si on n'arrive pas à connecter l'utilisateur, on reste sur la même page et on affiche un message d'erreur
+    if (!$utilisateur->connecterUtilisateur($pseudo, $mdp)) {
+        echo "<script>alert('Nom d\'utilisateur ou/et mot de passe incorrect(s)');</script>";
         header("Location:" . $_SERVER["HTTP_REFERER"]);
         return;
     }
-
+    //TODO : voir si ça ne serai pas plus judicieux d'utiliser des cookies ?
     if(session_start()){
-        $_SESSION["speudo"] = $resultat[0]["speudo"];
-        $_SESSION["mdp"] = $resultat[0]["mdp"];
-        $_SESSION["idUtilisateur"] = $resultat[0]["idUtilisateur"];
+        $_SESSION["speudo"] = $_GET["speudo"];
+        $_SESSION["mdp"] = $_GET["mdp"];
+        //TODO : supprimer l'utilisation de l'idUtilisateur, ça n'a pas de sens. Les speudos sont uniques.
+        $_SESSION["idUtilisateur"] = $utilisateur->trouverIdUtilisateur($pseudo, $mdp);
     }
 }
-header("Location:" . "/index.php?p=chat");
