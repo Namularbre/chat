@@ -12,6 +12,7 @@
 </head>
 <body class="blue lighten-4">
     <div class="container">
+        <h1 class="white black-text center-align">Il est temps de se connecter !</h1>
         <form class="white center-align" method="POST" action="index.php?p=connexionUtilisateur" style="margin: 1%">
             <label for="speudo">Votre speudo :</label>
             <input type="text" name="speudo" id="speudo" placeholder="Votre speudo" required>
