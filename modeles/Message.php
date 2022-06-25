@@ -8,7 +8,7 @@ class Message implements Connectable {
     public function __construct(){
         $this->bdd = $this->connecter();
     }
-    //Provient de Connectable. Cette méthode retourne une nouvelle liaison à la base de données
+    //Provient de Connectable. Cette méthode retourne une nouvelle liaison à la base de données.
     public function connecter() : BDD{
         return new BDD();
     }
