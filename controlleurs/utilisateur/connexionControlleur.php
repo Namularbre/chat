@@ -8,8 +8,8 @@ $utilisateur = new utilisateur();
 if (isset($_GET["submit"])) {
     $pseudo = $_GET["speudo"];
     $mdp = $_GET["mdp"];
-    //Si on n'arrive pas à connecter l'utilisateur, on reste sur la même page et on affiche un message d'erreur
-    if (!$utilisateur->connecterUtilisateur($pseudo, $mdp)) {
+    //Si on n'arrive pas à connecter l'utilisateur, on reste sur la même page et on affiche un message d'erreur.
+    if ($utilisateur->connecterUtilisateur($pseudo, $mdp)) {
         echo "<script>alert('Nom d\'utilisateur ou/et mot de passe incorrect(s)');</script>";
         header("Location:" . $_SERVER["HTTP_REFERER"]);
         return;
@@ -22,3 +22,4 @@ if (isset($_GET["submit"])) {
         $_SESSION["idUtilisateur"] = $utilisateur->trouverIdUtilisateur($pseudo, $mdp);
     }
 }
+header("Location:" . "/index.php?p=chat");
