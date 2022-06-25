@@ -5,7 +5,6 @@ require_once("../bdd/bdd.php");
 class Message implements Connectable {
     private BDD $bdd;
 
-
     public function __construct(){
         $this->bdd = $this->connecter();
     }
