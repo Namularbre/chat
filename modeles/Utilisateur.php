@@ -29,11 +29,18 @@ class Utilisateur implements Connectable
     }
     //Cette fonction cherche un utilisateur en base de données, et si elle le trouve, elle retourne vrai.
     public function connecterUtilisateur(string $pseudo, string $mdp) : bool{
-        $requeteTrouverUtilisateur = "SELECT count(*) FROM utilisateur WHERE speudo = '" . $pseudo . "' AND mdp = '" . $mdp . "'";
+        $requeteTrouverUtilisateur = "SELECT count(*) AS 'existe' FROM utilisateur WHERE speudo = '" . $pseudo . "' AND mdp = '" . $mdp . "'";
 
         $resultat = $this->bdd->faireRequete($requeteTrouverUtilisateur);
-        //On regarde si on a un utilisateur correspondant dans le résultat de la requête.
-        return $resultat == "1";
+
+        if (isset($resultat[0]["existe"])){
+            //On regarde si on a un utilisateur correspondant dans le résultat de la requête.
+            return $resultat[0]["existe"] == "1";
+        }
+        else {
+            throw new InvalidArgumentException("Le pseudo ou le mot de passe génère une erreur SQL");
+        }
+
     }
     //Cette méthode ajoute un utilisateur en base de données. ATTENTION, L'UTILISATEUR DOIT AVOIR UN PSEUDO UNIQUE
     public function ajouterUtilisateur(string $pseudo){
