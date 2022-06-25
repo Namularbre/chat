@@ -19,7 +19,16 @@ if (isset($_GET["submit"])) {
         $_SESSION["speudo"] = $_GET["speudo"];
         $_SESSION["mdp"] = $_GET["mdp"];
         //TODO : supprimer l'utilisation de l'idUtilisateur, ça n'a pas de sens. Les speudos sont uniques.
-        $_SESSION["idUtilisateur"] = $utilisateur->trouverIdUtilisateur($pseudo, $mdp);
+        $idUtilisateur = $utilisateur->trouverIdUtilisateur($pseudo, $mdp);
+
+        if($idUtilisateur != -1){
+            $_SESSION["idUtilisateur"] = $idUtilisateur;
+        }
+        else {
+            echo "<script>alert('Impossible de récupérer votre id.');</script>";
+            header("Location:" . $_SERVER["HTTP_REFERER"]);
+            return;
+        }
     }
 }
 header("Location:" . "/index.php?p=chat");
