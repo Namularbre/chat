@@ -10,8 +10,8 @@ if (isset($_GET["submit"])) {
     $mdp = $_GET["mdp"];
     //Si on n'arrive pas à connecter l'utilisateur, on reste sur la même page et on affiche un message d'erreur.
     if ($utilisateur->connecterUtilisateur($pseudo, $mdp)) {
+        //TODO : faire une page d'erreur, un copier coller de l'ancienne mais avec du texte
         echo "<script>alert('Nom d\'utilisateur ou/et mot de passe incorrect(s)');</script>";
-        header("Location:" . $_SERVER["HTTP_REFERER"]);
         return;
     }
     //TODO : voir si ça ne serai pas plus judicieux d'utiliser des cookies ?
@@ -26,7 +26,6 @@ if (isset($_GET["submit"])) {
         }
         else {
             echo "<script>alert('Impossible de récupérer votre id.');</script>";
-            header("Location:" . $_SERVER["HTTP_REFERER"]);
             return;
         }
     }
