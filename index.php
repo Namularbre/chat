@@ -24,12 +24,17 @@ switch ($url) {
     case "index.php?p=connection":
         require("vues/connection.php");
         break;
-
     case 'index.php?p=chat':
         require("vues/chat.php");
         break;
     case "index.php?p=affichageMessages":
         require("vues/affichageMessages.php");
+        break;
+    case "index.php?p=connexionErr":
+        require("vues/connexionErreur.php");
+        break;
+    case "index.php?p=connexionUtilisateur":
+        require("controlleurs/utilisateur/connexionControlleur.php");
         break;
     default:
         echo "<h1>ERREUR 404</h1> <p>L'url " . $url . " ne mène à rien.</p>";

@@ -1,7 +1,14 @@
 <?php
 
-require_once("../../bdd/bdd.php");
+
 require_once("Connectable.php");
+
+if (file_exists("../../bdd/bdd.php")){
+    require_once("../../bdd/bdd.php");
+}
+else{
+    require_once("bdd/bdd.php");
+}
 
 class Utilisateur implements Connectable
 {

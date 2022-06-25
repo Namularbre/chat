@@ -12,7 +12,7 @@
 </head>
 <body class="blue lighten-4">
     <div class="container">
-        <form class="white center-align" method="GET" action="../controlleurs/utilisateur/connexionControlleur.php" style="margin: 1%">
+        <form class="white center-align" method="POST" action="index.php?p=connexionUtilisateur" style="margin: 1%">
             <label for="speudo">Votre speudo :</label>
             <input type="text" name="speudo" id="speudo" placeholder="Votre speudo" required>
             <label for="mdp">Votre mot de passe :</label>
