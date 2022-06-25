@@ -35,7 +35,7 @@
 </div>
 <script type="text/javascript">
     const DELAY = 3000;
-    const URL_AFRAICHIR_MESSAGE = 'index.php?p=affichageMessages';
+    const URL_RAFRAICHIR_MESSAGE = 'index.php?p=affichageMessages';
     const METHODE_HTTP_POST = "POST";
     const ASYNCHRONE = true;
     const NOM_UTILISATEUR = <?php
@@ -71,14 +71,14 @@
             baliseMessage.innerHTML = requeteHttp.responseText;
         });
 
-        requeteHttp.open(METHODE_HTTP_POST, URL_AFRAICHIR_MESSAGE, ASYNCHRONE);
+        requeteHttp.open(METHODE_HTTP_POST, URL_RAFRAICHIR_MESSAGE, ASYNCHRONE);
 
         requeteHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         //On lance la requête HTTP
         requeteHttp.send(donnees);
     }
     /*
-        Toutes les "DELAY" miliseconde, on met à jour le chat
+        Toutes les "DELAY" millisecondes, on met à jour le chat
     */
     setInterval(() => {
         console.log("Mise à jour des messages...");
