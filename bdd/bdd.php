@@ -25,6 +25,9 @@ class BDD
      * Dans le contrôleur, vous pouvez faire quelques vérifications majeures sur les données ressorties
      *
      * plus d'info : https://nouvelle-techno.fr/articles/live-coding-creer-un-crud-en-php
+     *
+     * Pour faire une action en base, il faut juste renvoyer vers un contrôleur qui appellera un modèle et une de
+     * ses méthodes,
      */
 
     //La connexion à la base de données.
